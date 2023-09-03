@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_sql_lite_crud/crud/database/note_connection.dart';
 import 'package:flutter_sql_lite_crud/crud/model/note_model.dart';
 import 'package:flutter_sql_lite_crud/crud/view/add_note_screen.dart';
 import 'package:flutter_sql_lite_crud/crud/widget/note_widget.dart';
 import 'package:flutter_sql_lite_crud/crud/widget/refresh_widget.dart';
+import 'package:flutter_sql_lite_crud/notification/local_notification.dart';
 
 class NoteHome extends StatefulWidget {
   const NoteHome({super.key});
@@ -29,14 +31,29 @@ class _NoteHomeState extends State<NoteHome> {
     // TODO: implement initState
     super.initState();
     getNotes();
+    LocalNotification.initilize(flutterLocalNotificationsPlugin);
   }
+    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // centerTitle: true,
-        // title: const Text('Note'),
+      title: Text('Flutter Crud'),
+        iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+
+            child: IconButton(onPressed: ()=>{
+              LocalNotification.showBigTextNotification(title: 'New Message', body: 'I Love You',
+              flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin)},
+              icon: const Icon(Icons.notifications)),
+          // Icon(Icons.notifications),
+          ),
+        ],
       ),
       body: Column(
        children: [

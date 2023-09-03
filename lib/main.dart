@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sql_lite_crud/crud/view/note_home.dart';
+import 'package:flutter_sql_lite_crud/login/auth/sign_in_screen.dart';
 
 void main() {
   runApp(const MyApp());
